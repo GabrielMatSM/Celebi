@@ -15,5 +15,7 @@ public partial class Produto
 
     public string? Fornecedor { get; set; }
 
+    public bool? Ativo { get; set; }
+
     public virtual ICollection<Itempedido> Itempedidos { get; set; } = new List<Itempedido>();
 }

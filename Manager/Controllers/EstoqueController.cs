@@ -63,9 +63,10 @@ namespace Manager.Controllers
             }
 
         }
-        public void GetProdutos(int pagina, int quantidade)
+        /*public ActionResult ListaDeProdutos(int pagina, int quantidade)
         {
-            
+         
         }
+        */
     }
 }

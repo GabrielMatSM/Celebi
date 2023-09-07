@@ -48,12 +48,8 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.Clienteid)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("clienteid");
-            entity.Property(e => e.Ativo)
-                .HasColumnType("bit(1)")
-                .HasColumnName("ativo");
-            entity.Property(e => e.Dividaativa)
-                .HasColumnType("bit(1)")
-                .HasColumnName("dividaativa");
+            entity.Property(e => e.Ativo).HasColumnName("ativo");
+            entity.Property(e => e.Dividaativa).HasColumnName("dividaativa");
             entity.Property(e => e.Limitecredito).HasColumnName("limitecredito");
             entity.Property(e => e.Pessoaid).HasColumnName("pessoaid");
 
@@ -97,9 +93,7 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.Funcionarioid)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("funcionarioid");
-            entity.Property(e => e.Adm)
-                .HasColumnType("bit(1)")
-                .HasColumnName("adm");
+            entity.Property(e => e.Adm).HasColumnName("adm");
             entity.Property(e => e.Login)
                 .HasMaxLength(70)
                 .HasColumnName("login");
@@ -231,6 +225,10 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.Produtoid)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("produtoid");
+            entity.Property(e => e.Ativo)
+                .IsRequired()
+                .HasDefaultValueSql("true")
+                .HasColumnName("ativo");
             entity.Property(e => e.Descricao)
                 .HasMaxLength(70)
                 .HasColumnName("descricao");

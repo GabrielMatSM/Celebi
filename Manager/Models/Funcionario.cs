@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Manager.Models;
@@ -14,7 +13,7 @@ public partial class Funcionario
 
     public string Senha { get; set; } = null!;
 
-    public BitArray Adm { get; set; } = null!;
+    public bool Adm { get; set; }
 
     public virtual ICollection<Notafiscal> Notafiscals { get; set; } = new List<Notafiscal>();
 

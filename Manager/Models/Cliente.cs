@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Manager.Models;
@@ -12,9 +11,9 @@ public partial class Cliente
 
     public double Limitecredito { get; set; }
 
-    public BitArray Ativo { get; set; } = null!;
+    public bool Ativo { get; set; }
 
-    public BitArray Dividaativa { get; set; } = null!;
+    public bool Dividaativa { get; set; }
 
     public virtual ICollection<Contapendente> Contapendentes { get; set; } = new List<Contapendente>();
 
