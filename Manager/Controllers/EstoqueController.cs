@@ -53,14 +53,17 @@ namespace Manager.Controllers
                 {
                     oProduto.Quantidadeemestoque = Convert.ToInt32(values["Quantidade"]);
                 }
+                _context.Produtos.Add(oProduto);
+                _context.SaveChanges();
+                //Olhar nos projetos qual q é a classe q usa pra response pq eu n lembro
             }
             catch
             {
-
+                //Criar uma response com false, e a mensagem do pq deu errado e devolver pro javascript.
             }
 
         }
-        public void TesteAdicao()
+        public void GetProdutos(int pagina, int quantidade)
         {
             
         }
