@@ -7,7 +7,11 @@ namespace Manager.Controllers;
 public class EstoqueController : Controller
 {
     private readonly PostgresContext _context;
-
+    public EstoqueController(PostgresContext context)
+    {
+        _context = context;
+    }
+    #region Views
     public ActionResult ProdutoList()
     {
         return View();
@@ -18,7 +22,9 @@ public class EstoqueController : Controller
 
         return PartialView();
     }
+    #endregion
 
+    #region Produto
     public Produto? GetProduto(int? id)
     {
         Produto oProduto = _context.Produtos.Find(id);
@@ -28,13 +34,11 @@ public class EstoqueController : Controller
         }
         return oProduto;
     }
-    public EstoqueController(PostgresContext context)
-    {
-        _context = context;
-    }
+
     [HttpPost]
-    public string SaveProduto(FormCollection values)
+    public JsonResult SaveProduto(FormCollection values)
     {
+        JsonResult response;
         try
         {
             bool newRecord = false;
@@ -72,15 +76,16 @@ public class EstoqueController : Controller
             }
             _context.Produtos.Add(oProduto);
             _context.SaveChanges();
-            return "Produto salvo com sucesso!";
+
+            response = new JsonResult(Ok("Produto salvo com sucesso!"));
             //Olhar nos projetos qual q é a classe q usa pra response pq eu n lembro
 
         }
         catch (Exception ex)
         {
-            return $"Ocorreu o seguinte erro: {ex.Message}!";
+            response = new JsonResult(NotFound(ex.Message));
         }
-
+        return response;
     }
     public IActionResult ProdutoList(int pagina)
     {
@@ -109,4 +114,6 @@ public class EstoqueController : Controller
             return NoContent();
         }
     }
+    #endregion
+
 }
