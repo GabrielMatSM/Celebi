@@ -144,6 +144,7 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.Data).HasColumnName("data");
             entity.Property(e => e.Funcionarioid).HasColumnName("funcionarioid");
             entity.Property(e => e.Situacaonotaid).HasColumnName("situacaonotaid");
+            entity.Property(e => e.Valorpago).HasColumnName("valorpago");
             entity.Property(e => e.Valortotal).HasColumnName("valortotal");
 
             entity.HasOne(d => d.Funcionario).WithMany(p => p.Notafiscals)
@@ -249,7 +250,7 @@ public partial class PostgresContext : DbContext
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("situacaonotaid");
             entity.Property(e => e.Descricao)
-                .HasMaxLength(10)
+                .HasMaxLength(50)
                 .HasColumnName("descricao");
         });
 
