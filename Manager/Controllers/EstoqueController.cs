@@ -87,14 +87,17 @@ public class EstoqueController : Controller
         }
         return response;
     }
-    public IActionResult ProdutoList(int pagina)
+    public IActionResult ProdutoList(int pagina, bool pegarExcluidos = false)
     {
         int quantidadePorPagina = 50;
         using (var PostgresContext = new PostgresContext())
         {
-            var total = _context.Produtos.Count();
-            List<Produto> produtos = _context.Produtos.Skip((pagina - 1) * quantidadePorPagina).Take(quantidadePorPagina)
-                .OrderBy(a => a.Produtoid).ToList();
+            var total = _context.Produtos.Where(l=> pegarExcluidos || l.Ativo == true).Count();
+            List<Produto> produtos = _context.Produtos.
+                Where(l => pegarExcluidos || l.Ativo == true).
+                Skip((pagina - 1) * quantidadePorPagina).
+                Take(quantidadePorPagina).
+                OrderByDescending(a => a.Produtoid).ToList();
             return Ok(new { produtos, total });
         }
 

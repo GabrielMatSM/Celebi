@@ -15,6 +15,8 @@ public partial class Notafiscal
 
     public int? Situacaonotaid { get; set; }
 
+    public double Valorpago { get; set; }
+
     public virtual ICollection<Contapendente> Contapendentes { get; set; } = new List<Contapendente>();
 
     public virtual Funcionario? Funcionario { get; set; }
