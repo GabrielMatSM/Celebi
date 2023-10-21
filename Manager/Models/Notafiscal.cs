@@ -9,7 +9,7 @@ public partial class Notafiscal
 
     public int? Funcionarioid { get; set; }
 
-    public DateOnly Data { get; set; }
+    public DateTime Data { get; set; }
 
     public double Valortotal { get; set; }
 

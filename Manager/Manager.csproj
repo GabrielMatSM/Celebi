@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\Shared\_Layout.cshtml.css" />
+    <Compile Remove="CSS\NovaPasta\**" />
+    <Content Remove="CSS\NovaPasta\**" />
+    <EmbeddedResource Remove="CSS\NovaPasta\**" />
+    <None Remove="CSS\NovaPasta\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="JS\" />
+    <Folder Include="Content\Images\" />
     <Folder Include="CSS\" />
+    <Folder Include="JS\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\home.css" />
+    <None Include="wwwroot\images\fundoHome.jpg" />
+    <None Include="wwwroot\images\Home-icon.png" />
   </ItemGroup>
 
 </Project>

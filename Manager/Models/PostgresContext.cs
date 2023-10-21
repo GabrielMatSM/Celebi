@@ -25,8 +25,6 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<Notafiscal> Notafiscals { get; set; }
 
-    public virtual DbSet<Pedidocompra> Pedidocompras { get; set; }
-
     public virtual DbSet<Pessoa> Pessoas { get; set; }
 
     public virtual DbSet<Produto> Produtos { get; set; }
@@ -69,7 +67,9 @@ public partial class PostgresContext : DbContext
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("contapendenteidint");
             entity.Property(e => e.Clienteid).HasColumnName("clienteid");
-            entity.Property(e => e.Dataprevistadepagamento).HasColumnName("dataprevistadepagamento");
+            entity.Property(e => e.Dataprevistadepagamento)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("dataprevistadepagamento");
             entity.Property(e => e.Notafiscalid).HasColumnName("notafiscalid");
             entity.Property(e => e.Valorpendente).HasColumnName("valorpendente");
 
@@ -141,7 +141,9 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.Notafiscalid)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("notafiscalid");
-            entity.Property(e => e.Data).HasColumnName("data");
+            entity.Property(e => e.Data)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("data");
             entity.Property(e => e.Funcionarioid).HasColumnName("funcionarioid");
             entity.Property(e => e.Situacaonotaid).HasColumnName("situacaonotaid");
             entity.Property(e => e.Valorpago).HasColumnName("valorpago");
@@ -154,30 +156,6 @@ public partial class PostgresContext : DbContext
             entity.HasOne(d => d.Situacaonota).WithMany(p => p.Notafiscals)
                 .HasForeignKey(d => d.Situacaonotaid)
                 .HasConstraintName("notafiscal_fk2");
-        });
-
-        modelBuilder.Entity<Pedidocompra>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("pedidocompra");
-
-            entity.Property(e => e.Datacompra).HasColumnName("datacompra");
-            entity.Property(e => e.Dataentrega).HasColumnName("dataentrega");
-            entity.Property(e => e.Dataentregue).HasColumnName("dataentregue");
-            entity.Property(e => e.Fornecedor)
-                .HasMaxLength(70)
-                .HasColumnName("fornecedor");
-            entity.Property(e => e.Funcionarioid).HasColumnName("funcionarioid");
-            entity.Property(e => e.Pedidocompraid)
-                .ValueGeneratedOnAdd()
-                .UseIdentityAlwaysColumn()
-                .HasColumnName("pedidocompraid");
-            entity.Property(e => e.Valortotal).HasColumnName("valortotal");
-
-            entity.HasOne(d => d.Funcionario).WithMany()
-                .HasForeignKey(d => d.Funcionarioid)
-                .HasConstraintName("pedidocompra_fk");
         });
 
         modelBuilder.Entity<Pessoa>(entity =>

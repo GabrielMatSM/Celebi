@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Manager.Models;
-
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Manager.Controllers;
 
@@ -12,38 +12,52 @@ public class EstoqueController : Controller
         _context = context;
     }
     #region Views
-    public ActionResult ProdutoList()
+    public ActionResult Index()
     {
-        return View();
+        return (ActionResult)GetProdutoList();
     }
 
-    public ActionResult ProdutoDetail()
+    public Produto? Detail(int? id)
     {
-
-        return PartialView();
+        Produto oproduto;
+        if(id != null && id != 0)
+        {
+            oproduto = _context.Produtos.Where(p => p.Produtoid == id).FirstOrDefault();
+            if(oproduto == null)
+            {
+                oproduto = new Produto();
+            }
+        }
+        else
+        {
+            oproduto = new Produto();
+        }
+        return oproduto;
     }
     #endregion
 
     #region Produto
+    //Método para detalhe pra pegar um produto individualmente, caso não venha nenhum é um cadastro novo.
     public Produto? GetProduto(int? id)
     {
-        Produto oProduto = _context.Produtos.Find(id);
-        if (oProduto == null)
+        if (id != null)
         {
-            throw new Exception("Produto não encontrado");
+            Produto? oProduto = _context.Produtos.Find(id);
+            if (oProduto == null)
+            {
+                return null;
+            }
+            return oProduto;
         }
-        return oProduto;
+        return null;
     }
-
-    [HttpPost]
-    public JsonResult SaveProduto(FormCollection values)
+    public object SaveProduto(int id, string descricao, float preco,  int quantidade)
     {
-        JsonResult response;
         try
-        {
+        {   
             bool newRecord = false;
-            Produto oProduto;
-            if (string.IsNullOrEmpty(values["ProdutoID"]))
+            Produto? oProduto;
+            if (id == null || id == 0)
             {
                 newRecord = true;
             }
@@ -53,69 +67,75 @@ public class EstoqueController : Controller
             }
             else
             {
-                oProduto = _context.Produtos.Where(f => f.Produtoid == Convert.ToInt32(values["ProdutoID"])).FirstOrDefault();
+                oProduto = _context.Produtos.Where(f => f.Produtoid == Convert.ToInt32(id)).FirstOrDefault();
                 if (oProduto == null) { throw new Exception("O Produto não foi encontrado!"); }
             }
-            oProduto.Descricao = values["Descricao"];
-            oProduto.Fornecedor = values["Fornecedor"];
-            if (!string.IsNullOrEmpty(values["Preco"]))
+            oProduto.Descricao = descricao;
+            if (preco == 0)
             {
                 throw new Exception("Preço Inválido");
             }
             else
             {
-                oProduto.Preco = Convert.ToDouble(values["Preco"]);
+                oProduto.Preco = (decimal)preco;
             }
-            if (string.IsNullOrEmpty(values["Quantidade"]))
+            if (quantidade < 0)
             {
-                oProduto.Quantidadeemestoque = 0;
+                quantidade = 0;
             }
-            else
+            oProduto.Quantidadeemestoque = quantidade;
+   
+            if (newRecord)
             {
-                oProduto.Quantidadeemestoque = Convert.ToInt32(values["Quantidade"]);
+                _context.Produtos.Add(oProduto);
             }
-            _context.Produtos.Add(oProduto);
             _context.SaveChanges();
-
-            response = new JsonResult(Ok("Produto salvo com sucesso!"));
+            
+            return new { Success = true, Response = "Produto salvo com sucesso!" };
             //Olhar nos projetos qual q é a classe q usa pra response pq eu n lembro
 
         }
         catch (Exception ex)
         {
-            response = new JsonResult(NotFound(ex.Message));
+            return new { Success = false, Response = ex.Message };
         }
-        return response;
-    }
-    public IActionResult ProdutoList(int pagina, bool pegarExcluidos = false)
+    } 
+    public IActionResult GetProdutoList(int pagina = 1, bool pegarExcluidos = false, string descricao = "")
     {
         int quantidadePorPagina = 50;
-        using (var PostgresContext = new PostgresContext())
-        {
-            var total = _context.Produtos.Where(l=> pegarExcluidos || l.Ativo == true).Count();
-            List<Produto> produtos = _context.Produtos.
-                Where(l => pegarExcluidos || l.Ativo == true).
-                Skip((pagina - 1) * quantidadePorPagina).
-                Take(quantidadePorPagina).
-                OrderByDescending(a => a.Produtoid).ToList();
-            return Ok(new { produtos, total });
-        }
-
+        ModelListaProdutos lista = new ModelListaProdutos();
+        lista.total = _context.Produtos.Where(l=> pegarExcluidos || l.Ativo == true).Count();
+        lista.produtos = _context.Produtos.
+            Where(l => pegarExcluidos || l.Ativo == true).
+            Skip((pagina - 1) * quantidadePorPagina).
+            Take(quantidadePorPagina).
+            OrderByDescending(a => a.Produtoid).ToList();
+        return View("Index", lista);
     }
-    public IActionResult DeleteProduto(int id)
+    public object DeleteProduto(int id)
     {
 
         var Produto = _context.Produtos.Where(l => l.Produtoid == id).FirstOrDefault();
         if (Produto == null)
         {
-            return NotFound();
+            return new { Success = false, Response = "Produto não encontrado" };
         }
         else
         {
             Produto.Ativo = false;
             _context.SaveChanges();
-            return NoContent();
+            return new { Success = true, Response = "Produto removido!" };
         }
+    }
+
+    public void AtivaProdutos()
+    {
+        var produtos = _context.Produtos.ToList();
+        foreach(var produto in produtos)
+        {
+            produto.Ativo = true;
+        }
+        _context.SaveChanges();
     }
     #endregion
 

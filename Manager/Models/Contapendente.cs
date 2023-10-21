@@ -9,7 +9,7 @@ public partial class Contapendente
 
     public int Notafiscalid { get; set; }
 
-    public DateOnly Dataprevistadepagamento { get; set; }
+    public DateTime Dataprevistadepagamento { get; set; }
 
     public double Valorpendente { get; set; }
 
