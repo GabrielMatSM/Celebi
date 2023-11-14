@@ -1,1 +1,109 @@
-﻿<p>teste contas</p>
+﻿@using System.Globalization;
+<!DOCTYPE html>
+<html lang="pt-BR">
+@model List<Devedore>;
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/images/contas-icon.png" type="image/png">
+    <title>Contas - Celebi System</title>
+    <link rel="stylesheet" href="~/css/contas.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navigation">
+        <ul>
+            <li class="list active">
+                <a href="../Home">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Início</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../Caixa">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                    <span class="title">Caixa</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../Estoque">
+                    <span class="icon"><ion-icon name="cube-outline"></ion-icon></span>
+                    <span class="title">Estoque</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../Contas">
+                    <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+                    <span class="title">Contas</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <main class="table">
+        <section class="table_header">
+            <form action="">
+                <h1>Contas a Receber</h1>
+            </form>
+        </section>
+
+        <section class="table_body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Cliente Id</th>
+                        <th> Cliente </th>
+                        <th> Valor Total </th>
+                        <th> Valor Pendente </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model){
+                    <tr>
+                        <td>@item.Clienteid</td>
+                        <td>@item.Nome</td>
+                        <td>@Convert.ToDecimal(item.Valortotal).ToString("c", new CultureInfo("pt-BR"))</td>
+                        <td>@Convert.ToDecimal(item.Valorpendente).ToString("c", new CultureInfo("pt-BR"))</td>
+                        <td>
+                            <button onclick="abrirModal(@item.Clienteid)" type="button" class="table-btn">Editar</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <div class="janela-modal" id="janela-modal">
+        <div class="modal">
+            <button class="fechar" id="fechar">X</button>
+            <form>
+                <label>Cliente ID</label>
+                <input id="clienteid" type="text" readonly/>
+                <label>Cliente</label>
+                <input id="cliente"type="text" readonly>
+
+                <label>Valor Pago</label>
+                <input id="valorPago"class="dinheiro" required>
+
+                <label>Valor Pendente</label>
+                <input id="valorPendente"class="dinheiro" readonly>
+
+                <button type="button" class="modal-btn">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="~/js/jquery.mask.js"> </script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/contas.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

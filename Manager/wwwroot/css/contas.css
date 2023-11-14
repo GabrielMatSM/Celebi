@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -32,86 +32,86 @@ body {
     transition: 0.5s;
 }
 
-.navigation:hover {
-    width: 300px;
-}
+    .navigation:hover {
+        width: 300px;
+    }
 
-.navigation ul {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding-left: 0px;
-    padding-top: 35px;
-}
+    .navigation ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-left: 0px;
+        padding-top: 35px;
+    }
 
-.navigation ul li {
-    position: relative;
-    list-style: none;
-    width: 100%;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
+        .navigation ul li {
+            position: relative;
+            list-style: none;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
 
-.navigation ul li a {
-    position: relative;
-    display: flex;
-    width: 100%;
-    text-decoration: none;
-    color: white;
-}
+            .navigation ul li a {
+                position: relative;
+                display: flex;
+                width: 100%;
+                text-decoration: none;
+                color: white;
+            }
 
-.navigation ul li a .icon {
-    position: relative;
-    display: block;
-    min-width: 60px;
-    height: 60px;
-    text-align: center;
-    line-height: 70px;
-}
+                .navigation ul li a .icon {
+                    position: relative;
+                    display: block;
+                    min-width: 60px;
+                    height: 60px;
+                    text-align: center;
+                    line-height: 70px;
+                }
 
-.navigation ul li a .icon ion-icon {
-    position: relative;
-    font-size: 1.5rem;
-    z-index: 1;
-}
+                    .navigation ul li a .icon ion-icon {
+                        position: relative;
+                        font-size: 1.5rem;
+                        z-index: 1;
+                    }
 
-.navigation ul li a .title {
-    position: relative;
-    display: block;
-    padding-left: 10px;
-    height: 60px;
-    line-height: 60px;
-    white-space: nowrap;
-}
+                .navigation ul li a .title {
+                    position: relative;
+                    display: block;
+                    padding-left: 10px;
+                    height: 60px;
+                    line-height: 60px;
+                    white-space: nowrap;
+                }
 
-.navigation ul li.active {
-background: #0f89ab;
-}
+            .navigation ul li.active {
+                background: #0f89ab;
+            }
 
-.navigation ul li.active a::before {
-    content: '';
-    position: absolute;
-    top: -30px;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    background: #05b1e1;
-    border-radius: 50%;
-    box-shadow: 15px -15px 0 #0f89ab;
-}
+                .navigation ul li.active a::before {
+                    content: '';
+                    position: absolute;
+                    top: -30px;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    background: #05b1e1;
+                    border-radius: 50%;
+                    box-shadow: 15px -15px 0 #0f89ab;
+                }
 
-.navigation ul li.active a::after {
-    content: '';
-    position: absolute;
-    top: -30px;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    background: #05b1e1;
-    border-radius: 50%;
-    box-shadow: 15px -15px 0 #05b1e1;
-}
+                .navigation ul li.active a::after {
+                    content: '';
+                    position: absolute;
+                    top: -30px;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    background: #05b1e1;
+                    border-radius: 50%;
+                    box-shadow: 15px -15px 0 #05b1e1;
+                }
 
 main.table {
     width: 82vw;
@@ -126,27 +126,11 @@ main.table {
 }
 
 .table-btn {
-    width: 120px;
+    width: 170px;
     height: 40px;
     position: relative;
-    left: 60px;
+    right: 10px;
     background: #05b1e1;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-    font-weight: 600;
-}
-
-.table-btn2 {
-    width: 120px;
-    height: 40px;
-    position: relative;
-    left: 90px;
-    background: #e5817f;
     border: none;
     outline: none;
     border-radius: 40px;
@@ -164,61 +148,12 @@ main.table {
     padding: .8rem 1rem;
 }
 
-.table_header h1 {
-    font-size: 32px;
-    margin-top: 7px;
-    margin-left: 35px;
-}
+    .table_header h1 {
+        font-size: 32px;
+        margin-top: 7px;
+        margin-left: 35px;
+    }
 
-.table_header .search-box {
-    position: absolute;
-    top: 40px;
-    right: 180px;
-    transform: translate(-50%, -50%);
-    height: 40px;
-    width: 400px;
-    border-radius: 40px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-}
-
-.table_header .search-txt {
-    border: none;
-    background: none;
-    outline: none;
-    padding: 0;
-    font-size: 16px;
-    line-height: 30px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 40px;
-    height: 40px;
-}
-
-
-.table_header .btn {
-    width: 195px;
-    height: 40px;
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    background: white;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    color: #00647f;
-    font-weight: 600;
-}
-#btnProcurar{
-    top: 0px;
-    right: 0px;
-    position: relative;
-}
 .table_body {
     width: 95%;
     max-height: calc(89% - 1.6rem);
@@ -305,6 +240,7 @@ tbody tr:hover {
     .modal input {
         width: 100%;
         height: 20px;
+        text-align: center;
         background: transparent;
         border: none;
         outline: none;
@@ -316,20 +252,20 @@ tbody tr:hover {
         margin-bottom: 25px;
     }
 
-    .modal #btnAdicionar {
-        width: 300px;
-        height: 50px;
-        margin-top: 10px;
-        background: #05b1e1;
-        border: none;
-        outline: none;
-        border-radius: 40px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-        cursor: pointer;
-        font-size: 16px;
-        color: white;
-        font-weight: 600;
-    }
+.modal-btn {
+    width: 300px;
+    height: 50px;
+    margin-top: 10px;
+    background: #05b1e1;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+}
 
 
 .fechar {
@@ -365,11 +301,3 @@ tbody tr:hover {
 .abrir .modal {
     animation: abrirmodal 0.5s;
 }
-.modal *{
-    text-align:center;
-}
-
-/*@media (max-width: 1000px) {
-    min-width: 12.1rem;
-}
-*/

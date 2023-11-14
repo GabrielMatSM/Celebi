@@ -5,13 +5,13 @@ namespace Manager.Models;
 
 public partial class Contapendente
 {
-    public int Contapendenteidint { get; set; }
+    public int Contapendenteid { get; set; }
 
     public int Notafiscalid { get; set; }
 
     public DateTime Dataprevistadepagamento { get; set; }
 
-    public double Valorpendente { get; set; }
+    public decimal Valorpendente { get; set; }
 
     public int Clienteid { get; set; }
 

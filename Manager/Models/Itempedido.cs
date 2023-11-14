@@ -13,7 +13,7 @@ public partial class Itempedido
 
     public int Quantidade { get; set; }
 
-    public double Precototal { get; set; }
+    public decimal Precototal { get; set; }
 
     public virtual Notafiscal Notafiscal { get; set; } = null!;
 

@@ -19,6 +19,8 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<Contapendente> Contapendentes { get; set; }
 
+    public virtual DbSet<Devedore> Devedores { get; set; }
+
     public virtual DbSet<Funcionario> Funcionarios { get; set; }
 
     public virtual DbSet<Itempedido> Itempedidos { get; set; }
@@ -59,13 +61,13 @@ public partial class PostgresContext : DbContext
 
         modelBuilder.Entity<Contapendente>(entity =>
         {
-            entity.HasKey(e => e.Contapendenteidint).HasName("contapendente_pkey");
+            entity.HasKey(e => e.Contapendenteid).HasName("contapendente_pkey");
 
             entity.ToTable("contapendente");
 
-            entity.Property(e => e.Contapendenteidint)
+            entity.Property(e => e.Contapendenteid)
                 .UseIdentityAlwaysColumn()
-                .HasColumnName("contapendenteidint");
+                .HasColumnName("contapendenteid");
             entity.Property(e => e.Clienteid).HasColumnName("clienteid");
             entity.Property(e => e.Dataprevistadepagamento)
                 .HasColumnType("timestamp without time zone")
@@ -82,6 +84,20 @@ public partial class PostgresContext : DbContext
                 .HasForeignKey(d => d.Notafiscalid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("contapendente_fk");
+        });
+
+        modelBuilder.Entity<Devedore>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("devedores");
+
+            entity.Property(e => e.Clienteid).HasColumnName("clienteid");
+            entity.Property(e => e.Nome)
+                .HasMaxLength(70)
+                .HasColumnName("nome");
+            entity.Property(e => e.Valorpendente).HasColumnName("valorpendente");
+            entity.Property(e => e.Valortotal).HasColumnName("valortotal");
         });
 
         modelBuilder.Entity<Funcionario>(entity =>
@@ -180,13 +196,12 @@ public partial class PostgresContext : DbContext
                 .HasMaxLength(11)
                 .IsFixedLength()
                 .HasColumnName("cpf");
+            entity.Property(e => e.Datanascimento)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("datanascimento");
             entity.Property(e => e.Endereco)
-                .HasMaxLength(200)
+                .HasMaxLength(500)
                 .HasColumnName("endereco");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(20)
-                .HasColumnName("estado");
-            entity.Property(e => e.Idade).HasColumnName("idade");
             entity.Property(e => e.Nome)
                 .HasMaxLength(70)
                 .HasColumnName("nome");

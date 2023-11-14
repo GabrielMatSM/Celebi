@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html>
-@model ModelListaProdutos;
+
 
 <html lang="pt-BR">
+@model ModelListaProdutos;
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,9 +47,10 @@
     <main class="table">
         <section class="table_header">
             <h1>Estoque de Produtos</h1>
-            <button onclick="abrirModal(0)" type="submit" class="btn">Adicionar Produto</button>
+            <button onclick="abrirModal(0)" type="button" class="btn">Adicionar Produto</button>
             <div class="search-box">    
-                <input class="search-txt" type="text" name="" placeholder="Faça sua pesquisa">
+                <input class="search-txt" id="textoProcurar"type="text" name="" placeholder="Faça sua pesquisa">
+                <button class="btn" id="btnProcurar"> Buscar</button>
             </div>
         </section>
 
@@ -74,7 +76,7 @@
                         <td>@Produto.Quantidadeemestoque</td>   
                     <td>
                         <button onclick="abrirModal(@Produto.Produtoid)" type="submit" class="table-btn">Editar</button>
-                        <button class="table-btn2 btn btn-delete">Excluir</button>
+                        <button onclick="deleteProduto(@Produto.Produtoid)"class="table-btn2 btn btn-delete">Excluir</button>
                     </td>
                     </tr>
                     }
@@ -103,21 +105,13 @@
             </form>
         </div>
     </div>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script>
-        const list = document.querySelectorAll('.list');
-        function activelink(){
-            list.forEach((item) =>
-            item.classList.remove('active'));
-            this.classList.add('active');
-        }
-            list.forEach((item)=>
-            item.addEventListener('click',activelink));
-    </script>
+   
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="~/js/jquery.mask.js"> </script>
     <script src="~/js/estoque.js"></script>
+    <script src="~/js/site.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body> 
 
 </html>

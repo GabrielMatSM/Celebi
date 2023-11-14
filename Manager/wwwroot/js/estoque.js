@@ -1,10 +1,6 @@
 ﻿$(document).ready(function () {
+    $('#btnProcurar').on("click", () => getProdutoList())
     var ids = $('.id');
-    ids.each(function () {
-        deleteProduto($(this))
-    });
-    $('.dinheiro').mask("#.##0,00", { reverse: true });
-    $('.numero').mask('0#');
 })
    
 
@@ -12,6 +8,7 @@
 var deleteProduto = function (id) {
     var deletebutton = id.parent().find('.btn-delete');
     var avo = id.parent();
+    console.log("aaa")
     deletebutton.on("click", (function () {
         $.ajax({
             type: "POST",
@@ -20,7 +17,7 @@ var deleteProduto = function (id) {
             ,
             dataType: "json",
             success: function (data) {
-                alert(data.response);
+                   alert(data.response);
                 avo.hide();
             },
             error: function () {
@@ -64,14 +61,20 @@ function getProduto(produtoId) {
     })
 }
 
+function getProdutoList() {
+    var filter = $('#textoProcurar').val()
+    window.location.href = '/Estoque/' +'?descricao=' + filter;
+       
+}
 function saveProduto() {
     $.ajax({
         type: "POST",
         dataType: "json",
-        url: "Estoque/SaveProduto/",
+        url: "/Estoque/SaveProduto/",
         data: { id: $('#m-id').val(), descricao: $('#m-produto').val(), preco: $('#m-preco').val(), quantidade: $('#m-quantidade').val() },
         success: function (data) {
             alert(data.response);
+            window.location.reload();
         },
     });
 }

@@ -11,11 +11,11 @@ public partial class Notafiscal
 
     public DateTime Data { get; set; }
 
-    public double Valortotal { get; set; }
+    public decimal Valortotal { get; set; }
 
     public int? Situacaonotaid { get; set; }
 
-    public double Valorpago { get; set; }
+    public decimal Valorpago { get; set; }
 
     public virtual ICollection<Contapendente> Contapendentes { get; set; } = new List<Contapendente>();
 

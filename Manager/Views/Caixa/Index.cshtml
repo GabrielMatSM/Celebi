@@ -1,1 +1,201 @@
-﻿<p>Caixa</p>
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/images/caixa-icon.png" type="image/png">
+    <title>Caixa - Celebi System</title>
+    <link rel="stylesheet" href="./css/caixa.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navigation">
+        <ul>
+            <li class="list active">
+                <a href="../Home">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Início</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../Caixa">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                    <span class="title">Caixa</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../Estoque">
+                    <span class="icon"><ion-icon name="cube-outline"></ion-icon></span>
+                    <span class="title">Estoque</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="../Contas">
+                    <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+                    <span class="title">Contas</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <main class="table">
+        <section class="table_header">
+            <form action="">
+                <h1>Caixa</h1>
+                <button type="button" class="btn-search">Adicionar Produto</button>
+                <select class="seletor"id="search-box">
+                    <option value="0">Selecione um Produto</option>
+                </select>
+               
+            </form>
+        </section>
+
+        <section class="table_body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> ID </th>
+                        <th> Produto </th>
+                        <th> Valor Unitário </th>
+                        <th> Quantidade </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="itens">
+                    <!--
+                    <tr class="item">
+                        <td class="item-id">32132143</td>
+                        <td class="item-name">Lapis</td>
+                        <td class="item-price">1,25</td>
+                        <td class="item-quantity">
+                            <input class="numero" placeholder="Quantidade">
+                        </td>
+                        <td class="btn-delete">
+                            <button type="submit" class="table-btn">Excluir</button>
+                        </td>
+                    </tr>
+                    -->
+                </tbody>
+            </table>
+        </section>
+        <div class="table_footer">
+            <h1>Concluir Compra</h1>
+            <button onclick="abrirModal('segunda-modal')" type="submit" class="btn_cliente">Cadastrar Cliente</button>
+            <button onclick="abrirModal('janela-modal')" type="submit" class="btn">Continuar</button>
+        </div>
+    </main>
+
+    <div class="janela-modal" id="janela-modal">
+        <div class="modal">
+            <button class="fechar" id="fechar">X</button>
+            <form>
+                <main class="table_caixa">
+                    <section class="caixa_header">
+                        <form action="">
+                            <h1>Confirmação da Compra</h1>
+                        </form>
+                    </section>
+                    <section class="caixa_body">
+                        <table class="caixa_table">
+                            <thead>
+                                <tr>
+                                    <th> ID </th>
+                                    <th> Produto </th>
+                                    <th> Valor Unitário </th>
+                                    <th> Quantidade </th>
+                                </tr>
+                            </thead>
+                            <tbody class="modal-itens">
+                                <!--
+                                <tr>
+                                    <td>32132143</td>
+                                    <td>Lapis</td>
+                                    <td>1,25</td>
+                                    <td>7</td>
+                                </tr>
+                                -->
+                            </tbody>
+                        </table>
+                    </section>
+                    <div class="caixa_footer">
+                        <h1 id="valor-total">Total da Compra:</h1>
+                        <input id="valor-pago"class="dinheiro" placeholder="Valor Pago" required>
+                        <input class="numero cpf" placeholder="CPF" required>
+                        <select class="seletor"id="Pagamento">
+                            <option value="1">Parcelado</option>
+                            <option value="0">À vista</option>
+                        </select>
+                        <button type="button" onclick="finalizarCompra()"class="btn">Concluir</button>
+                    </div>
+                </main>
+            </form>
+        </div>
+    </div>
+
+    <div class="janela-modal" id="segunda-modal">
+        <div class="modal_dois">
+            <button class="fechar" id="fechar">X</button>
+            <div class="container">
+                <div class="title">Cadastrar Cliente</div>
+                <form id="cadastra-Cliente">
+                    <div class="informacao-cliente">
+                        <div class="input-box">
+                            <span class="informacao">Nome completo</span>
+                            <input id="nome"name="nomeCompleto" type="text" placeholder="Digite o Nome Completo" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="informacao">Data de nascimento</span>
+                            <input id="nasc"name="DataNascimento" type="date" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="informacao">RG</span>
+                            <input id="rg" name="Rg" class="numero" placeholder="Digite o número do RG" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="informacao">CPF</span>
+                            <input id="cpf"name="Cpf" class="numero" placeholder="Digite o número do CPF" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="informacao">Endereço</span>
+                            <input id="endereco" name="Endereco"type="text" placeholder="Digite o endereço" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="informacao">Cidade</span>
+                            <input id="cidade" name="Cidade"type="text" placeholder="Digite o nome da cidade" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="informacao">CEP</span>
+                            <input id="cep" name="CEP"class="numero" placeholder="Digite o CEP" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="informacao">Contato</span>
+                            <input id="contato" name="Contato" type="tel" placeholder="(xx) xxxxx-xxxx" required>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="button" value="Cadastrar" onclick="cadastraCliente()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="~/js/jquery.mask.js"> </script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/caixa.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
